@@ -23,8 +23,8 @@ local function sand_on_blast(pos)
 	end
 end
 
-local function blast_resistant(pos)
-	if math.random(1, damage_blast_resistant) == 1 then
+local function blast_resistant(pos, strength)
+	if math.random(1, damage_blast_resistant * strength) == 1 then
 		minetest.remove_node(pos)
 	end
 end
@@ -41,9 +41,11 @@ function tnt_extras.register_sand(name)
 	})
 end
 
-function tnt_extras.register_blast_resistant(name)
+function tnt_extras.register_blast_resistant(name, strength)
 	minetest.override_item(name, {
-		on_blast = blast_resistant
+		on_blast = function(pos) 
+			blast_resistant(pos, strength)
+		end
 	})
 end
 
@@ -63,9 +65,9 @@ tnt_extras.register_sand("default:sand")
 tnt_extras.register_sand("default:desert_sand")
 
 -- Register blast resistant nodes
-tnt_extras.register_blast_resistant("default:diamondblock")
-tnt_extras.register_blast_resistant("default:obsidian")
-tnt_extras.register_blast_resistant("default:obsidianbrick")
-tnt_extras.register_blast_resistant("default:mese")
-tnt_extras.register_blast_resistant("default:nyancat")
-tnt_extras.register_blast_resistant("default:nyancat_rainbow")
+tnt_extras.register_blast_resistant("default:diamondblock" ,2)
+tnt_extras.register_blast_resistant("default:obsidian" ,1)
+tnt_extras.register_blast_resistant("default:obsidianbrick" ,.9)
+tnt_extras.register_blast_resistant("default:mese" ,.6)
+tnt_extras.register_blast_resistant("default:nyancat" ,.8)
+tnt_extras.register_blast_resistant("default:nyancat_rainbow" ,.8)
