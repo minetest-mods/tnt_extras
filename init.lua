@@ -1,16 +1,16 @@
 tnt_extras = {}
 
 -- Load settings
-local lava_chance = minetest.setting_get("lava_chance") or 24
+local lava_chance = minetest.setting_get("lava_chance") or 150
 local gravel_chance = minetest.setting_get("gravel_chance") or 8
 local glass_chance = minetest.setting_get("glass_chance") or 6
 local damage_blast_resistant = minetest.setting_get("damage_blast_resistant") or 24
 
 local function stone_on_blast(pos)
-	if math.random(1, lava_chance) == 1 then
-		minetest.set_node(pos, {name = "default:lava_source"})
-	elseif math.random(1, gravel_chance) == 1 then
+	if math.random(1, gravel_chance) == 1 then
 		minetest.set_node(pos, {name = "default:gravel"})
+	elseif math.random(1, lava_chance) == 1 then
+		minetest.set_node(pos, {name = "default:lava_source"})
 	else 
 		minetest.remove_node(pos)
 	end
