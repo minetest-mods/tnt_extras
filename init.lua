@@ -5,46 +5,53 @@ local lava_chance = minetest.setting_get("lava_chance") or 150
 local gravel_chance = minetest.setting_get("gravel_chance") or 8
 local glass_chance = minetest.setting_get("glass_chance") or 6
 local damage_blast_resistant = minetest.setting_get("damage_blast_resistant") or 24
-
-local function stone_on_blast(pos)
-	if math.random(1, gravel_chance) == 1 then
-		minetest.set_node(pos, {name = "default:gravel"})
-	elseif math.random(1, lava_chance) == 1 then
-		minetest.set_node(pos, {name = "default:lava_source"})
-	else 
-		minetest.remove_node(pos)
-	end
-end
-
-local function sand_on_blast(pos)
-	minetest.remove_node(pos)
-	if math.random(1, glass_chance) == 1 then
-		minetest.add_item(pos, "vessels:glass_fragments")
-	end
-end
-
-local function blast_resistant(pos, strength)
-	if math.random(1, damage_blast_resistant * strength) == 1 then
-		minetest.remove_node(pos)
-	end
-end
+local glass_block_chance = minetest.setting_get("glass_block_chance") or 48
+local melt_chance = minetest.setting_get("melt_chance") or 3
 
 function tnt_extras.register_stone(name)
 	minetest.override_item(name, {
-		on_blast = stone_on_blast
+		on_blast = function(pos)
+			if math.random(1, gravel_chance) == 1 then
+				minetest.set_node(pos, {name = "default:gravel"})
+			elseif math.random(1, lava_chance) == 1 then
+				minetest.set_node(pos, {name = "default:lava_source"})
+			else 
+				minetest.remove_node(pos)
+			end
+		end
 	})
 end
 
 function tnt_extras.register_sand(name)
 	minetest.override_item(name, {
-		on_blast = sand_on_blast
+		on_blast = function(pos)
+			if math.random(1, glass_block_chance) == 1 then
+				minetest.set_node(pos, {name = "default:glass"})
+				return
+			elseif math.random(1, glass_chance) == 1 then
+				minetest.add_item(pos, "vessels:glass_fragments")
+			end
+			minetest.remove_node(pos)
+		end
 	})
 end
 
 function tnt_extras.register_blast_resistant(name, strength)
 	minetest.override_item(name, {
 		on_blast = function(pos) 
-			blast_resistant(pos, strength)
+			if math.random(1, damage_blast_resistant * strength) == 1 then
+				minetest.remove_node(pos)
+			end
+		end
+	})
+end
+
+function tnt_extras.register_can_melt(name)
+	minetest.override_item(name,{
+		on_blast = function(pos)
+			if math.random(1, melt_chance) == 1 then
+				minetest.set_node(pos, {name = "default:water_source"})
+			end
 		end
 	})
 end
@@ -71,3 +78,7 @@ tnt_extras.register_blast_resistant("default:obsidianbrick" ,.9)
 tnt_extras.register_blast_resistant("default:mese" ,.6)
 tnt_extras.register_blast_resistant("default:nyancat" ,.8)
 tnt_extras.register_blast_resistant("default:nyancat_rainbow" ,.8)
+
+-- Register nodes that melt into water_source
+tnt_extras.register_can_melt("default:snowblock")
+tnt_extras.register_can_melt("default:ice")
