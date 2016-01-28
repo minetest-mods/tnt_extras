@@ -59,13 +59,10 @@ end
 -- Register stonelike nodes
 tnt_extras.register_stone("default:stone")
 tnt_extras.register_stone("default:cobble")
-tnt_extras.register_stone("default:stonebrick")
 tnt_extras.register_stone("default:mossycobble")
 tnt_extras.register_stone("default:desert_stone")
 tnt_extras.register_stone("default:desert_cobble")
-tnt_extras.register_stone("default:desert_stonebrick")
 tnt_extras.register_stone("default:sandstone")
-tnt_extras.register_stone("default:sandstonebrick")
 
 -- Register sandlike nodes
 tnt_extras.register_sand("default:sand")
@@ -78,6 +75,11 @@ tnt_extras.register_blast_resistant("default:obsidianbrick" ,.9)
 tnt_extras.register_blast_resistant("default:mese" ,.6)
 tnt_extras.register_blast_resistant("default:nyancat" ,.8)
 tnt_extras.register_blast_resistant("default:nyancat_rainbow" ,.8)
+tnt_extras.register_blast_resistant("default:desert_stonebrick",.35)
+tnt_extras.register_blast_resistant("default:sandstonebrick",.35)
+tnt_extras.register_blast_resistant("default:stonebrick",.35)
+tnt_extras.register_blast_resistant("default:brick",.35)
+tnt_extras.register_blast_resistant("default:cloud",10)
 
 -- Register nodes that melt into water_source
 tnt_extras.register_can_melt("default:snowblock")
