@@ -73,13 +73,20 @@ tnt_extras.register_blast_resistant("default:diamondblock" ,2)
 tnt_extras.register_blast_resistant("default:obsidian" ,1)
 tnt_extras.register_blast_resistant("default:obsidianbrick" ,.9)
 tnt_extras.register_blast_resistant("default:mese" ,.6)
-tnt_extras.register_blast_resistant("default:nyancat" ,.8)
-tnt_extras.register_blast_resistant("default:nyancat_rainbow" ,.8)
 tnt_extras.register_blast_resistant("default:desert_stonebrick",.35)
 tnt_extras.register_blast_resistant("default:sandstonebrick",.35)
 tnt_extras.register_blast_resistant("default:stonebrick",.35)
 tnt_extras.register_blast_resistant("default:brick",.35)
 tnt_extras.register_blast_resistant("default:cloud",10)
+
+-- Check if nyancats are registered
+if minetest.registered_nodes["nyancat:nyancat"] ~= nil then
+	tnt_extras.register_blast_resistant("nyancat:nyancat" ,.8)
+	tnt_extras.register_blast_resistant("nyancat:nyancat_rainbow" ,.8)
+elseif minetest.registered_nodes["default:nyancat"] ~= nil then
+	tnt_extras.register_blast_resistant("default:nyancat" ,.8)
+	tnt_extras.register_blast_resistant("default:nyancat_rainbow" ,.8)
+end
 
 -- Register nodes that melt into water_source
 tnt_extras.register_can_melt("default:snowblock")
