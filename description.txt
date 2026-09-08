@@ -1,1 +1,0 @@
-Makes TNT blasts effect diffrent types of blocks diffrently.
