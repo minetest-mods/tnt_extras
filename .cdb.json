@@ -1,0 +1,12 @@
+{
+  "$schema": "https://content.luanti.org/api/cdb_schema/",
+  "title": "TNT Extras",
+  "tags": ["mtg", "decorative"],
+  "type": "MOD",
+  "dev_state": "MAINTENANCE_ONLY",
+  "ai_disclosure": "NONE",
+  "license": "MIT",
+  "repo": "https://github.com/minetest-mods/tnt_extras",
+  "issue_tracker": "https://github.com/minetest-mods/tnt_extras/issues/new/choose/",
+  "short_description": "Makes TNT blasts effect different types of blocks differently."
+}
