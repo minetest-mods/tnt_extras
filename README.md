@@ -4,7 +4,7 @@ This mod adds extra TNT blast effects. It changes stone like nodes into gravel o
 
 ## Dependencies
 
-- Luanti/Minetest v0.4.10+
+- Luanti/Minetest v5.0+
 - MTG mods `default` and `vessels`
 
 ## License
